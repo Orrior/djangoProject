@@ -1,4 +1,6 @@
-### GET/POST/PUT emails 
+# NB! use "skey" Header for authentication. Password is in "djangoProject/authentication.py" in "authenticate" method.
+
+### GET/POST/PUT emails
 >localhost:8000/api/v1/organization/
 
 ### GET Specific email by id

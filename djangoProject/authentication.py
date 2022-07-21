@@ -6,7 +6,8 @@ from rest_framework import exceptions
 
 class ExampleAuthentication(authentication.BaseAuthentication):
     def authenticate(self, request):
-        if (request.META.get("HTTP_SKEY") == "asdf"):
+        password = "asdf"  # Make password more distinctive
+        if request.META.get("HTTP_SKEY") == password:
             # return (User.objects.all().first(), None)
             user = User.objects.first()
             return (user, None)
