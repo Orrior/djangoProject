@@ -1,7 +1,8 @@
 # business logic
 from rest_framework import status
+from rest_framework.authentication import TokenAuthentication
 from rest_framework.generics import (ListCreateAPIView, RetrieveUpdateDestroyAPIView)
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 
 from djangoProject.authentication import ExampleAuthentication
@@ -12,8 +13,8 @@ from . import serializer
 class OrganizationAPI(ListCreateAPIView):
     queryset = Organization.objects.all()
     serializer_class = serializer.OrganizationSerializer
-    authentication_classes = (ExampleAuthentication,)  # specify this authentication class in your view
-    permission_classes = [AllowAny]
+    authentication_classes = (TokenAuthentication, ExampleAuthentication,)  # specify this authentication class in your view
+    permission_classes = [IsAuthenticated]
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
