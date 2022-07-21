@@ -31,7 +31,8 @@ class OrganizationAPI(ListCreateAPIView):
 class OrganizationRetrieveUpdateDestroyApi(RetrieveUpdateDestroyAPIView):
     serializer_class = serializer.OrganizationSerializer
     queryset = Organization.objects.all()
-    permission_classes = [AllowAny]
+    authentication_classes = (TokenAuthentication, ExampleAuthentication,)
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         return Organization.objects.filter(id=self.kwargs.get("pk", None))
